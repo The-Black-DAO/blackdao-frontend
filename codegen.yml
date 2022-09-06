@@ -1,0 +1,19 @@
+overwrite: true
+schema: "https://api.thegraph.com/subgraphs/id/QmWrvfZh9qXPV5oJWapWZsgnPDEQAys2sGL1DBkkV7FEnt"
+documents: "src/graphql/queries.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    config:
+      withHooks: true
+      preResolveTypes: true
+      addInfiniteQuery: true
+      scalars:
+        BigDecimal: number
+        BigInt: number
+    hooks:
+      afterOneFileWrite:
+        - yarn eslint --config ./.eslintrc.js --fix
